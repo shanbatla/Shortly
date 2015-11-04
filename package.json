@@ -7,8 +7,13 @@
   "license": "Proprietary",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node index.js & ./node_modules/.bin/mocha --bail --reporter nyan test/ServerSpec.js; pkill -n node;"
   },
+  "engines": {
+    "node": "0.12.7",
+    "npm": "2.11.3"
+  },  
   "dependencies": {
     "knex": "~0.5.7",
     "bookshelf": "~0.6.4",
