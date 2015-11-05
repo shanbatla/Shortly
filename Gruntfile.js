@@ -118,6 +118,7 @@ module.exports = function(grunt) {
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
       // add your production server task here
+      grunt.registerTask('heroku:development', 'clean less mincss');
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
@@ -125,9 +126,15 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
-    //1. build?
-    //2.?
+    if(grunt.option('prod')) {
+      // add your production server task here
+      grunt.registerTask('heroku:development', 'clean less mincss');
+    } else {
+      grunt.task.run([ 'server-dev' ]);
   ]);
 
+  grunt.registerTask('heroku:production', 'build');
+
+  grunt.registerTask('default', ['watch']);
 
 };
