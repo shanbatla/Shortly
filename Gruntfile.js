@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist:{
-        src: ['public/client/app.js', 'public/client/createLinkView.js', 'public/client/link.js', 'public/client/links.js', 'public/client/linksView.js', 'public/client/linkView.js', 'public/client/router.js', 'public/lib/backbone.js', 'public/lib/handlebars.js', 'public/lib/jquery.js', 'public/lib/underscore.js', 'public/style.css'],
+        src: ['public/client/app.js', 'public/client/createLinkView.js', 'public/client/link.js', 'public/client/links.js', 'public/client/linksView.js', 'public/client/linkView.js', 'public/client/router.js', 'public/lib/backbone.js', 'public/lib/handlebars.js', 'public/lib/jquery.js', 'public/lib/underscore.js'],
         dest: 'public/dist/built.js'
       }
     },
@@ -30,11 +30,17 @@ module.exports = function(grunt) {
 
     uglify: {
       //some stuff here
+      my_target: {
+        files: {
+          'public/dist/output.min.js': ['public/dist/built.js']
+        }
+      }
     },
 
     jshint: {
       files: [
         // Add filespec list here
+        'public/client/app.js', 'public/client/createLinkView.js', 'public/client/link.js', 'public/client/links.js', 'public/client/linksView.js', 'public/client/linkView.js', 'public/client/router.js'
       ],
       options: {
         force: 'true',
@@ -103,12 +109,10 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    //put some stuff here**
-    //1. concat
-    //2. uglify
-    //3. run jshint
-    //4. run mocha tests
-    grunt.task.run([ 'test' ])
+    'jshint',
+    'concat',
+    'uglify',
+    'test' 
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -121,6 +125,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    //1. build?
+    //2.?
   ]);
 
 
