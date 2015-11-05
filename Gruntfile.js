@@ -72,10 +72,18 @@ module.exports = function(grunt) {
       }
     },
 
-    shell: {
-      prodServer: {
+    'heroku-deploy' : {
+      production: {
+        deployBranch: 'master'
       }
     },
+
+    shell: {
+      target: {
+        command: 'git push heroku master'
+      }
+    }
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -86,6 +94,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  //add the deploy task
+  grunt.loadNpmTasks('grunt-heroku-deploy');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -104,6 +114,10 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
+  grunt.registerTask('default', ['watch']);
+
+  grunt.registerTask('heroku-deploy', ['shell']);
+  
   grunt.registerTask('test', [
     'mochaTest'
   ]);
@@ -124,17 +138,16 @@ module.exports = function(grunt) {
   //   }
   // });
 
-  // grunt.registerTask('deploy', [
-  //   // add your deploy tasks here
-  //   if(grunt.option('prod')) {
-  //     // add your production server task here
-  //     grunt.registerTask('heroku:development', 'clean less mincss');
-  //   } else {
-  //     grunt.task.run([ 'server-dev' ]);
-  // ]);
+  grunt.registerTask('deploy', 'this deploys stuff', function() {
+    // add your deploy tasks here
+    if(grunt.option('prod')) {
+      // add your production server task here
+      grunt.task.run('build');
+    } else {
+      grunt.task.run([ 'server-dev' ]);
+    }
+  });
 
   grunt.registerTask('heroku:production', 'build');
-
-  grunt.registerTask('default', ['watch']);
 
 };
