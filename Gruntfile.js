@@ -115,23 +115,23 @@ module.exports = function(grunt) {
     'test' 
   ]);
 
-  grunt.registerTask('upload', function(n) {
-    if(grunt.option('prod')) {
-      // add your production server task here
-      grunt.registerTask('heroku:development', 'clean less mincss');
-    } else {
-      grunt.task.run([ 'server-dev' ]);
-    }
-  });
+  // grunt.registerTask('upload', function(n) {
+  //   if(grunt.option('prod')) {
+  //     // add your production server task here
+  //     grunt.registerTask('heroku:development', 'clean less mincss');
+  //   } else {
+  //     grunt.task.run([ 'server-dev' ]);
+  //   }
+  // });
 
-  grunt.registerTask('deploy', [
-    // add your deploy tasks here
-    if(grunt.option('prod')) {
-      // add your production server task here
-      grunt.registerTask('heroku:development', 'clean less mincss');
-    } else {
-      grunt.task.run([ 'server-dev' ]);
-  ]);
+  // grunt.registerTask('deploy', [
+  //   // add your deploy tasks here
+  //   if(grunt.option('prod')) {
+  //     // add your production server task here
+  //     grunt.registerTask('heroku:development', 'clean less mincss');
+  //   } else {
+  //     grunt.task.run([ 'server-dev' ]);
+  // ]);
 
   grunt.registerTask('heroku:production', 'build');
 
