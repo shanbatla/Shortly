@@ -11,6 +11,7 @@ app.configure(function() {
     app.set('view engine', 'ejs');
     app.use(partials());
     app.use(express.bodyParser());
+    //change location to dist, then git ignore the public file?
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser('shhhh, very secret'));
     app.use(express.session());

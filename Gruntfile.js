@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist:{
-        src: ['public/client/app.js', 'public/client/createLinkView.js', 'public/client/link.js', 'public/client/links.js', 'public/client/linksView.js', 'public/client/linkView.js', 'public/client/router.js', 'public/lib/backbone.js', 'public/lib/handlebars.js', 'public/lib/jquery.js', 'public/lib/underscore.js'],
+        src: ['public/client/**/*.js'],
         dest: 'public/dist/built.js'
       }
     },
@@ -40,7 +40,12 @@ module.exports = function(grunt) {
     jshint: {
       files: [
         // Add filespec list here
-        'public/client/app.js', 'public/client/createLinkView.js', 'public/client/link.js', 'public/client/links.js', 'public/client/linksView.js', 'public/client/linkView.js', 'public/client/router.js'
+        'Gruntfile.js',
+        'app/**/*.js',
+        'public/**/*.js',
+        'lib/**/*.js',
+        './*.js',
+        'spec/**/*.js'
       ],
       options: {
         force: 'true',
@@ -53,6 +58,14 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      options: {
+        keepSpecialComments: 0
+      },
+      dist: {
+        files: {
+          'public/dist/style.min.css': 'public/style.css'
+        }
+      }
     },
 
     watch: {
@@ -72,12 +85,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // 'heroku-deploy' : {
-    //   production: {
-    //     deployBranch: 'master'
-    //   }
-    // },
-
     shell: {
       target: {
         command: 'git push heroku master'
@@ -94,8 +101,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
-  //add the deploy task
-  //grunt.loadNpmTasks('grunt-heroku-deploy');
+
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -128,15 +134,6 @@ module.exports = function(grunt) {
     'uglify',
     'test' 
   ]);
-
-  // grunt.registerTask('upload', function(n) {
-  //   if(grunt.option('prod')) {
-  //     // add your production server task here
-  //     grunt.registerTask('heroku:development', 'clean less mincss');
-  //   } else {
-  //     grunt.task.run([ 'server-dev' ]);
-  //   }
-  // });
 
   grunt.registerTask('deploy', 'this deploys stuff', function() {
     // add your deploy tasks here
